@@ -1,6 +1,6 @@
 import os
 
-from .settings import *
+from .settings_common import *
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
