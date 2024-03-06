@@ -30,9 +30,9 @@ class InquiryForm(forms.Form):
 
         subject = f'お問い合わせ: {title}'
         message = f'送信者名: {name}\nメールアドレス: {email}\nメッセージ: \n{message}'
-        from_email = os.environ.get('FORM_EMAIL')
+        from_email = os.environ.get('FROM_EMAIL')
         to_list = [
-            os.environ.get('FORM_EMAIL')
+            os.environ.get('FROM_EMAIL')
         ]
         cc_list = [
             email
