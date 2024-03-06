@@ -2,6 +2,7 @@ import os
 
 from django import forms
 from django.core.mail import EmailMessage
+
 from .models import Diary
 
 class InquiryForm(forms.Form):
@@ -15,10 +16,13 @@ class InquiryForm(forms.Form):
 
         self.fields['name'].widget.attrs['class'] = 'form-control'
         self.fields['name'].widget.attrs['placeholder'] = 'お名前をここに入力してください。'
+
         self.fields['email'].widget.attrs['class'] = 'form-control'
         self.fields['email'].widget.attrs['placeholder'] = 'メールアドレスをここに入力してください。'
+
         self.fields['title'].widget.attrs['class'] = 'form-control'
         self.fields['title'].widget.attrs['placeholder'] = 'タイトルをここに入力してください。'
+
         self.fields['message'].widget.attrs['class'] = 'form-control'
         self.fields['message'].widget.attrs['placeholder'] = 'メッセージをここに入力してください。'
 
@@ -28,8 +32,8 @@ class InquiryForm(forms.Form):
         title = self.cleaned_data['title']
         message = self.cleaned_data['message']
 
-        subject = f'お問い合わせ: {title}'
-        message = f'送信者名: {name}\nメールアドレス: {email}\nメッセージ: \n{message}'
+        subject = 'お問い合わせ {}'.format(title)
+        message = '送信者名: {0}\nメールアドレス: {1}\nメッセージ:\n{2}'.format(name, email, message)
         from_email = os.environ.get('FROM_EMAIL')
         to_list = [
             os.environ.get('FROM_EMAIL')

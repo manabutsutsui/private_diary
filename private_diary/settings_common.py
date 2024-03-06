@@ -1,6 +1,6 @@
+import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,12 +14,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'diary.apps.DiaryConfig',
     'accounts.apps.AccountsConfig',
+
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+
     'django_bootstrap5',
+
     'django_ses',
 ]
 
@@ -104,6 +108,8 @@ TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
 
@@ -129,9 +135,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 SITE_ID = 1
 
-AUTHENTICATEION_BACKENDS = (
-    'allauth.account.auth_backends.AuthenticationBackend',
-    'django.contrib.auth.backends.ModelBackend',
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',  # 一般ユーザー用(メールアドレス認証)
+    'django.contrib.auth.backends.ModelBackend',  # 管理サイト用(ユーザー名認証)
 )
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
@@ -140,7 +146,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
-LOGIN_REDIRECT_URL = 'diary:index'
+LOGIN_REDIRECT_URL = 'diary:diary_list'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 ACCOUNT_LOGOUT_ON_GET = True

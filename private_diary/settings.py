@@ -1,5 +1,3 @@
-import os
-
 from .settings_common import *
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
@@ -19,30 +17,34 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
 
+    # ロガーの設定
     'loggers': {
+        # Djangoが利用するロガー
         'django': {
             'handlers': ['file'],
-            'level': 'INFO'
+            'level': 'INFO',
         },
-
+        # diaryアプリケーションが利用するロガー
         'diary': {
             'handlers': ['file'],
-            'level': 'INFO'
-        }
+            'level': 'INFO',
+        },
     },
 
+    # ハンドラの設定
     'handlers': {
         'file': {
             'level': 'INFO',
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/django.log'),
             'formatter': 'prod',
-            'when': 'D',
-            'interval': 1,
-            'backupCount': 7,
+            'when': 'D',  # ログローテーション(新しいファイルへの切り替え)間隔の単位(D=日)
+            'interval': 1,  # ログローテーション間隔(1日単位)
+            'backupCount': 7,  # 保存しておくログファイル数
         },
     },
 
+    # フォーマッタの設定
     'formatters': {
         'prod': {
             'format': '\t'.join([
@@ -54,3 +56,16 @@ LOGGING = {
         },
     }
 }
+
+# セキュリティ関連設定
+# security.W004
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# security.W008
+SECURE_SSL_REDIRECT = True
+# security.W012
+SESSION_COOKIE_SECURE = True
+# security.W016
+CSRF_COOKIE_SECURE = True
+# security.W021
+SECURE_HSTS_PRELOAD = True
