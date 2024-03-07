@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}お問い合わせページ | Private Diary{% endblock %}
+{% block title %}お問い合わせ | Private Diary{% endblock %}
 
 {% block active_inquiry %}active{% endblock %}
 
@@ -10,7 +10,7 @@
         <form method="post">
             {% csrf_token %}
 
-            {{ from.non_field_errors }}
+            {{ form.non_field_errors }}
 
             {% for field in form %}
             <div class="mb-4 col-8">
