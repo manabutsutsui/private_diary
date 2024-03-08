@@ -9,6 +9,8 @@ ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
 STATIC_ROOT = '/usr/share/nginx/html/static'
 MEDIA_ROOT = '/usr/share/nginx/html/media'
 
+AWS_SES_REGION_NAME="ap-northeast-1" #追加する
+AWS_SES_REGION_ENDPOINT="email.ap-northeast-1.amazonaws.com" #追加する
 AWS_SES_ACCESS_KEY_ID = os.environ.get('AWS_SES_ACCESS_KEY_ID')
 AWS_SES_SECRET_ACCESS_KEY = os.environ.get('AWS_SES_SECRET_ACCESS_KEY')
 EMAIL_BACKEND = 'django_ses.SESBackend'
